@@ -1,0 +1,33 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  height?: string;
+}
+const { height = '700px' } = Astro.props;
+---
+
+<div class="calendly-wrapper">
+  <div
+    class="calendly-inline-widget"
+    data-url={`${SITE.calendlyUrl}?hide_gdpr_banner=1&primary_color=c29d46`}
+    style={`min-width:320px;height:${height};`}
+  ></div>
+
+  <noscript>
+    <a href={SITE.calendlyUrl} target="_blank" rel="noopener" class="btn btn-primary">
+      Book a time on Calendly
+    </a>
+  </noscript>
+</div>
+
+<script is:inline async src="https://assets.calendly.com/assets/external/widget.js" charset="utf-8"></script>
+
+<style>
+  .calendly-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+</style>

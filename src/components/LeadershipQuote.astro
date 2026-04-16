@@ -1,0 +1,116 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<section class="section-padding leadership-quote" class:list={[{ compact }]}>
+  <div class="container">
+    <div class="layout">
+      <div class="img-wrap reveal">
+        <img
+          src="/images/kane-headshot.svg"
+          alt="Kane Neubauer, CEO and Founder"
+          class="headshot"
+          width="480"
+          height="600"
+          loading="lazy"
+        />
+      </div>
+      <div class="quote-wrap reveal" data-delay="100">
+        <svg class="quote-mark" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
+        <p class="quote-text">Language is the architecture of opportunity.</p>
+        <p class="quote-body">
+          Our mission is rooted in a deep commitment to educational equity. Multilingual education
+          isn't only about language — it's about identity, opportunity, and the full participation
+          of every student in their community.
+        </p>
+        <div class="sig">
+          <strong>Kane Neubauer</strong>
+          <span>CEO &amp; Founder, Immersion Education Partners</span>
+        </div>
+        {!compact && (
+          <a href="/about#leadership" class="btn btn-outline">Meet the Team</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .leadership-quote { background: var(--bg-body); }
+  .leadership-quote.compact { padding: 5rem 0; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .img-wrap {
+    position: relative;
+  }
+
+  .headshot {
+    width: 100%;
+    border-radius: var(--radius-md);
+    filter: grayscale(5%);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    box-shadow: var(--shadow-float);
+  }
+
+  .img-wrap::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--brand-gold);
+    border-radius: var(--radius-md);
+    z-index: -1;
+    opacity: 0.35;
+  }
+
+  .quote-mark {
+    color: var(--brand-gold);
+    opacity: 0.35;
+    margin-bottom: 1rem;
+  }
+
+  .quote-text {
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-head);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .quote-body {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+
+  .sig {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 1.25rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--border-light);
+  }
+  .sig strong { color: var(--text-head); font-family: var(--font-sans); }
+  .sig span { font-size: 0.9rem; color: var(--text-muted); }
+
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .img-wrap { max-width: 380px; }
+    .img-wrap::before { display: none; }
+  }
+</style>
