@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#0f172a"/>
+  <circle cx="400" cy="400" r="140" fill="#c29d46" opacity="0.3"/>
+  <circle cx="400" cy="400" r="100" fill="#c29d46" opacity="0.5"/>
+  <path d="M 200 800 Q 400 650, 600 800 L 600 1000 L 200 1000 Z" fill="#c29d46" opacity="0.3"/>
+  <text x="50%" y="94%" text-anchor="middle" font-family="Manrope, system-ui, sans-serif" font-weight="600" font-size="28" fill="#c29d46">Headshot placeholder</text>
+</svg>

@@ -1,0 +1,229 @@
+---
+import { SITE } from '../site';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#expertise', label: 'Expertise' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="header">
+  <div class="container nav-wrapper">
+    <a href="/" class="logo" aria-label={`${SITE.name} home`}>
+      <img src="/images/logo.svg" alt="" class="logo-img" width="64" height="64" />
+      <span class="logo-text">{SITE.shortName}</span>
+    </a>
+
+    <nav aria-label="Primary" class="nav-desktop">
+      <ul>
+        {links.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        class="icon-btn"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle color theme"
+      >
+        <!-- Inline SVG icons — no runtime dep -->
+        <svg data-icon="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg data-icon="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </button>
+      <a href="/contact" class="btn btn-primary btn-cta-header">Get Started</a>
+      <button
+        class="icon-btn nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav panel -->
+  <div class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <nav aria-label="Mobile primary">
+      <ul>
+        {links.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+        <li><a href="/contact" class="mobile-cta">Get Started</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    transition: var(--transition);
+    background: transparent;
+  }
+
+  header.scrolled {
+    background: var(--bg-body);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  [data-theme="dark"] header.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    text-decoration: none;
+    color: var(--text-head);
+  }
+
+  .logo-img {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--brand-gold);
+    transition: var(--transition);
+    background: var(--bg-surface);
+  }
+
+  header.scrolled .logo-img {
+    height: 44px;
+    width: 44px;
+  }
+
+  .logo-text {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-desktop ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-desktop a {
+    text-decoration: none;
+    color: var(--text-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    padding: 0.25rem 0;
+    position: relative;
+  }
+
+  .nav-desktop a:hover { color: var(--brand-gold); }
+
+  .nav-desktop a[aria-current="page"] {
+    color: var(--brand-gold);
+  }
+  .nav-desktop a[aria-current="page"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--brand-gold);
+    border-radius: 2px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+  .icon-btn:hover { color: var(--brand-gold); }
+
+  .nav-toggle { display: none; }
+
+  /* Mobile nav panel */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 85vw);
+    background: var(--bg-body);
+    border-left: 1px solid var(--border-light);
+    padding: 6rem 2rem 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    z-index: 90;
+    overflow-y: auto;
+  }
+  .mobile-nav.open { transform: translateX(0); box-shadow: var(--shadow-float); }
+
+  .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .mobile-nav a {
+    display: block;
+    padding: 0.875rem 0;
+    text-decoration: none;
+    color: var(--text-head);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .mobile-nav a.mobile-cta {
+    background: var(--brand-gold);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.875rem 1.25rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .nav-desktop { display: none; }
+    .nav-toggle { display: flex; }
+    .btn-cta-header { display: none; }
+  }
+</style>

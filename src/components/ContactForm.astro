@@ -1,0 +1,140 @@
+---
+import { SITE } from '../site';
+---
+
+<form class="contact-form" action={SITE.formspree.contact} method="POST">
+  <div class="grid-2-cols">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name" />
+    </div>
+    <div class="form-group">
+      <label for="organization">Organization</label>
+      <input
+        type="text"
+        id="organization"
+        name="organization"
+        autocomplete="organization"
+        placeholder="District or school"
+      />
+    </div>
+  </div>
+
+  <div class="grid-2-cols">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="name@school.edu"
+      />
+    </div>
+    <div class="form-group">
+      <label for="role">Your role</label>
+      <select id="role" name="role">
+        <option value="">Select one</option>
+        <option value="superintendent">Superintendent / Cabinet</option>
+        <option value="principal">Principal / Admin</option>
+        <option value="coordinator">Coordinator / Director</option>
+        <option value="teacher">Teacher / Coach</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="interest">What are you exploring?</label>
+    <select id="interest" name="interest">
+      <option value="">Select one</option>
+      <option value="program-design">Program design &amp; launch</option>
+      <option value="pd">Professional development</option>
+      <option value="coaching">Instructional coaching</option>
+      <option value="assessment">Assessment &amp; evaluation</option>
+      <option value="other">Something else</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="message">Tell us about your goals</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      required
+      placeholder="Where are you today, and what would success look like?"
+    ></textarea>
+  </div>
+
+  <!-- Honeypot -->
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true" />
+
+  <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+  <p class="form-note">We'll respond within two business days.</p>
+</form>
+
+<style>
+  .contact-form {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: var(--text-head);
+    font-size: 0.92rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--bg-body);
+    color: var(--text-head);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--brand-gold);
+    box-shadow: 0 0 0 3px rgba(194, 157, 70, 0.15);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+  .form-note {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .contact-form { padding: 1.75rem; }
+    .grid-2-cols { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

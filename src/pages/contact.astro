@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CalendlyEmbed from '../components/CalendlyEmbed.astro';
+import { SITE } from '../site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Immersion Education Partners. Schedule a consultation or send a message to explore how we can support your district's immersion goals."
+>
+  <!-- Header -->
+  <section class="page-header section-padding">
+    <div class="container">
+      <div class="header-content reveal">
+        <span class="overline">Get in Touch</span>
+        <h1>Let's talk about your district's goals.</h1>
+        <p class="lede">
+          Book a 30-minute consultation, or send a message and we'll respond within two business days.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main contact layout -->
+  <section class="section-padding contact">
+    <div class="container">
+      <div class="contact-layout">
+        <aside class="info reveal">
+          <h2>Reach us directly</h2>
+          <ul>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href={`tel:${SITE.phoneRaw}`}>{SITE.phone}</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>{SITE.city}, {SITE.region}</span>
+            </li>
+          </ul>
+
+          <div class="info-block">
+            <h3>Prefer a call?</h3>
+            <p>Use the calendar below to book a time that works for you. No prep needed — just bring your questions.</p>
+            <a href={SITE.calendlyUrl} target="_blank" rel="noopener" class="btn btn-outline">
+              Open full Calendly
+            </a>
+          </div>
+
+          <div class="info-block">
+            <h3>Who we work with</h3>
+            <ul class="bullets">
+              <li>District cabinets planning a new program</li>
+              <li>Principals and coaches refining an existing one</li>
+              <li>State agencies and educational foundations</li>
+              <li>Universities preparing the next generation of bilingual educators</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="form-wrapper reveal" data-delay="100">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendly inline embed -->
+  <section class="section-padding calendly-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Book a Call</span>
+        <h2>Pick a time that works for you</h2>
+      </div>
+      <div class="reveal">
+        <CalendlyEmbed />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: 10rem;
+    padding-bottom: 3rem;
+    background: var(--bg-body);
+  }
+  .page-header .header-content { max-width: 800px; }
+  .page-header h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin: 0.75rem 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--text-body);
+    max-width: 640px;
+  }
+
+  .contact { background: var(--bg-surface); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info > ul {
+    list-style: none;
+    margin-bottom: 2.5rem;
+  }
+  .info > ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-body);
+    font-size: 1.02rem;
+  }
+  .info > ul li svg { color: var(--brand-gold); flex-shrink: 0; }
+  .info > ul a { color: inherit; text-decoration: none; }
+  .info > ul a:hover { color: var(--brand-gold); }
+
+  .info-block {
+    margin-bottom: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-light);
+  }
+  .info-block h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .info-block p { font-size: 0.95rem; margin-bottom: 1rem; }
+
+  .bullets { list-style: none; }
+  .bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand-gold);
+  }
+
+  .calendly-section { background: var(--bg-body); }
+
+  @media (max-width: 900px) {
+    .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  title?: string;
+  body?: string;
+}
+
+const {
+  title = 'Ready to transform your district?',
+  body = 'Book a 30-minute consultation to explore how immersion and dual language can work in your context.',
+} = Astro.props;
+---
+
+<section class="section-padding cta-band">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div>
+        <h2>{title}</h2>
+        <p>{body}</p>
+      </div>
+      <div class="cta-actions">
+        <a href={SITE.calendlyUrl} target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
+        <a href="/contact" class="btn btn-outline">Send a Message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { background: var(--bg-body); }
+
+  .cta-box {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-surface) 100%);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--brand-gold);
+  }
+
+  .cta-box h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-box p {
+    font-size: 1.05rem;
+    color: var(--text-body);
+    max-width: 480px;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 800px) {
+    .cta-box { grid-template-columns: 1fr; padding: 2.5rem; }
+    .cta-actions { justify-content: flex-start; }
+  }
+</style>

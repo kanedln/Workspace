@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site';
+
+const updated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title="Terms of Service" description="Terms of service for Immersion Education Partners." noindex>
+  <section class="legal section-padding">
+    <div class="container">
+      <article class="legal-content">
+        <span class="overline">Legal</span>
+        <h1>Terms of Service</h1>
+        <p class="meta">Last updated: {updated}</p>
+
+        <div class="placeholder-note">
+          <strong>TODO before launch:</strong> Draft real terms with a lawyer or generator
+          (<a href="https://termly.io/" target="_blank" rel="noopener">Termly</a> /
+          <a href="https://www.iubenda.com/" target="_blank" rel="noopener">iubenda</a>).
+          Replace this placeholder content entirely.
+        </div>
+
+        <h2>1. Use of the site</h2>
+        <p>
+          This site is provided for informational purposes. By using it you agree not to misuse
+          the site, attempt to access areas you are not authorized to access, or interfere with its
+          operation.
+        </p>
+
+        <h2>2. Engagements</h2>
+        <p>
+          Nothing on this site constitutes a service contract. All consulting engagements with
+          {SITE.name} are governed by a separate, signed agreement.
+        </p>
+
+        <h2>3. Contact</h2>
+        <p>
+          Questions about these terms? Email
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal { background: var(--bg-body); padding-top: 10rem; }
+  .legal-content { max-width: 720px; margin: 0 auto; }
+  .legal-content h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0.75rem 0 0.5rem;
+  }
+  .legal-content h2 {
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-content p { font-size: 1rem; margin-bottom: 1rem; }
+  .legal-content a { color: var(--brand-gold); }
+  .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .placeholder-note {
+    background: var(--brand-gold-light);
+    color: var(--brand-gold-dark);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    border-left: 3px solid var(--brand-gold);
+    margin: 2rem 0 3rem;
+  }
+  [data-theme="dark"] .placeholder-note {
+    background: rgba(194, 157, 70, 0.1);
+    color: var(--brand-gold);
+  }
+</style>
