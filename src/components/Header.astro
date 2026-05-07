@@ -147,10 +147,14 @@ const currentPath = Astro.url.pathname;
 
   .nav-desktop a:hover { color: var(--brand-gold); }
 
-  .nav-desktop a[aria-current="page"] {
+  .nav-desktop a[aria-current="page"],
+  .nav-desktop a[aria-current="location"],
+  .nav-desktop a.is-active {
     color: var(--brand-gold);
   }
-  .nav-desktop a[aria-current="page"]::after {
+  .nav-desktop a[aria-current="page"]::after,
+  .nav-desktop a[aria-current="location"]::after,
+  .nav-desktop a.is-active::after {
     content: '';
     position: absolute;
     left: 0;
@@ -210,6 +214,10 @@ const currentPath = Astro.url.pathname;
     font-weight: 600;
     font-size: 1.125rem;
     border-bottom: 1px solid var(--border-light);
+  }
+  .mobile-nav a[aria-current="location"],
+  .mobile-nav a.is-active {
+    color: var(--brand-gold);
   }
   .mobile-nav a.mobile-cta {
     background: var(--brand-gold);

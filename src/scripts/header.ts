@@ -44,6 +44,49 @@ function initHeader() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && panel.classList.contains('open')) close();
   });
+
+  document.addEventListener('click', (e) => {
+    if (!panel.classList.contains('open')) return;
+    const target = e.target as Node;
+    if (!panel.contains(target) && !toggle.contains(target)) close();
+  });
+
+  // Scrollspy for same-page hash links on the home page.
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>(
+    '.nav-desktop a[href^="/#"], .mobile-nav a[href^="/#"]'
+  );
+  const sections = Array.from(navLinks)
+    .map((link) => link.getAttribute('href')?.replace('/#', ''))
+    .filter((id): id is string => Boolean(id))
+    .map((id) => document.getElementById(id))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  if (window.location.pathname === '/' && sections.length > 0) {
+    const setActive = (id: string) => {
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        const active = href === `/#${id}`;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      {
+        rootMargin: '-35% 0px -55% 0px',
+        threshold: [0.15, 0.35, 0.6],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
 }
 
 if (document.readyState === 'loading') {
